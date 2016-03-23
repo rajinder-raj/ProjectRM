@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">Project RM</string>
     <string name="title_activity_maps">Map</string>
+
+    <!-- Upload Activity strings -->
+    <string name="upload_title">Share Your Photos!</string>
+    <string name="upload_button">Upload</string>
+    <string name="title_activity_add_photo">AddPhoto</string>
+    <string name="upload_name">Title:</string>
+    <string name="upload_check_use_current_location">Use Current Location</string>
 </resources>
