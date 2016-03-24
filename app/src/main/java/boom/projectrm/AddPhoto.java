@@ -36,6 +36,7 @@ public class AddPhoto extends AppCompatActivity implements View.OnClickListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_photo);
 
+
         // Firebase initial setup
         Firebase.setAndroidContext(this);
         fbdb = new Firebase("https://boomerango.firebaseio.com/imagesV2");

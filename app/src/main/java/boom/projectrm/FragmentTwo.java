@@ -1,5 +1,6 @@
 package boom.projectrm;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,15 +12,21 @@ import android.widget.Button;
 /**
  * Created by Kim on 3/20/2016.
  */
-public class FragmentTwo extends Fragment {
+public class FragmentTwo extends Fragment implements View.OnClickListener {
+    private Button upload_button;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
-        return inflater.inflate(R.layout.fragment_two,container, false);
+        View view = inflater.inflate(R.layout.fragment_two,container, false);
+        upload_button = (Button) view.findViewById(R.id.uploadAct);
+        upload_button.setOnClickListener(this);
+
+        return view;
     }
 
-    public void onClickUpload(View view) {
-        Button uploadAct = (Button) view;
+    public void onClick(View v) {
+        Button uploadAct = (Button) v;
         Intent myIntent = new Intent(getActivity(), AddPhoto.class);
         myIntent.putExtra("boom.realmaps.EXTRA_CURR_LATITUDE", 10.10); // todo pass current latitude
         myIntent.putExtra("boom.realmaps.EXTRA_CURR_LONGITUDE", 10.10); // todo pass current longitude
