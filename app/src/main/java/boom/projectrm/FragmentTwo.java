@@ -13,12 +13,13 @@ import android.widget.Button;
  * Created by Kim on 3/20/2016.
  */
 public class FragmentTwo extends Fragment implements View.OnClickListener {
+    private View view;
     private Button upload_button;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
-        View view = inflater.inflate(R.layout.fragment_two,container, false);
+        view = inflater.inflate(R.layout.fragment_two,container, false);
         upload_button = (Button) view.findViewById(R.id.uploadAct);
         upload_button.setOnClickListener(this);
 
