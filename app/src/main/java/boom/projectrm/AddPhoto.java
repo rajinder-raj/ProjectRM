@@ -1,11 +1,13 @@
 package boom.projectrm;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -20,16 +22,22 @@ import com.firebase.geofire.GeoFire;
 import com.firebase.geofire.GeoLocation;
 import com.firebase.geofire.GeoQuery;
 
+import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class AddPhoto extends AppCompatActivity implements View.OnClickListener {
     private static final int RESULT_LOAD_IMAGE = 1;
+    private static final int RESULT_CAMERA_START = 2;
     private Firebase fbdb;
     private GeoFire geofbdb;
     private ImageView imageToUpload;
     private Button bUploadImage;
     private EditText uploadImageName;
     private CheckBox check_useCurrentLocation;
+    private File imageFile;
+    private String mCurrentPhotoPath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,21 +93,16 @@ public class AddPhoto extends AppCompatActivity implements View.OnClickListener 
 
     /**
      * Gallery selection binds the uri to the imageToUpload
+     *
      * @param requestCode
      * @param resultCode
      * @param data
      */
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && data != null) {
-            Uri selectedImage = data.getData();
-            imageToUpload.setImageURI(selectedImage);
-        }
-    }
+
 
     /**
      * Add image to the Firebase database with GeoFire support.
+     *
      * @param img
      * @param imgGeo
      */
@@ -121,6 +124,7 @@ public class AddPhoto extends AppCompatActivity implements View.OnClickListener 
 
     /**
      * Extract the GeoLocation of an image based on its Exif info
+     *
      * @param imagePath
      * @return
      */
@@ -130,13 +134,76 @@ public class AddPhoto extends AppCompatActivity implements View.OnClickListener 
             double latitude = Double.parseDouble(bitmapExif.getAttribute(ExifInterface.TAG_GPS_LONGITUDE));
             double longitude = Double.parseDouble(bitmapExif.getAttribute(ExifInterface.TAG_GPS_LONGITUDE));
             return new GeoLocation(latitude, longitude);
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             return null;
         }
     }
 
     public GeoQuery getImageRadius(double latitude, double longitude, double radius) {
         return geofbdb.queryAtLocation(new GeoLocation(latitude, longitude), radius);
+    }
+
+
+
+    public void dispatchTakePictureIntent(View view){
+        Intent intent=new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+
+        if(intent.resolveActivity(getPackageManager())!= null){
+            File imageFile = null;
+
+            try {
+                imageFile = createImageFile();
+            }catch(IOException ex){
+
+            }
+            if(imageFile != null) {
+                intent.putExtra(MediaStore.EXTRA_OUTPUT,Uri.fromFile(imageFile));
+                startActivityForResult(intent, RESULT_CAMERA_START);
+            }
+        }
+    }
+
+    private File createImageFile() throws IOException{
+        String timeStamp = new SimpleDateFormat("yyyyMMdd__HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+
+        File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+
+        File image = File.createTempFile(imageFileName, ".jpg", storageDir);
+
+        mCurrentPhotoPath = "file:" + image.getAbsolutePath();
+
+        return image;
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode,resultCode, data);
+            switch (resultCode){
+                case RESULT_CAMERA_START:
+                    if(imageFile.exists())
+                    {
+                        Toast.makeText(this,"The file was saved at"+imageFile.getAbsolutePath(),Toast.LENGTH_LONG).show();
+                    }
+                    else
+                    {
+                        Toast.makeText(this,"Error",Toast.LENGTH_LONG).show();
+                    }
+
+                    break;
+                case Activity.RESULT_CANCELED:
+                    break;
+                case RESULT_LOAD_IMAGE:
+                    Uri selectedImage = data.getData();
+                    imageToUpload.setImageURI(selectedImage);
+
+                default:
+                    break;
+
+
+
+        }
     }
 }
