@@ -61,9 +61,9 @@ public class AddPhoto extends AppCompatActivity implements View.OnClickListener,
     private GoogleMap mMap;
     private ImageView imageToUpload;
     private Button bUploadImage;
+    private Button finalLocation;
     private ImageButton bSearch;
     private EditText uploadImageName;
-    private CheckBox check_useCurrentLocation;
     private File imageFile;
     private String mCurrentPhotoPath;
     private EditText address;
@@ -77,7 +77,7 @@ public class AddPhoto extends AppCompatActivity implements View.OnClickListener,
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_photo);
+        setContentView(R.layout.content_add_photo);
 
         // setOnMarkerClickListener, GoogleMap
 
@@ -90,38 +90,60 @@ public class AddPhoto extends AppCompatActivity implements View.OnClickListener,
         imageToUpload = (ImageView) findViewById(R.id.imageToUpload);
         bUploadImage = (Button) findViewById(R.id.bUploadImage);
         uploadImageName = (EditText) findViewById(R.id.etUploadName);
-        check_useCurrentLocation = (CheckBox) findViewById(R.id.useCurrLocation);
         address = (EditText) findViewById(R.id.locationAddress);
         bSearch = (ImageButton) findViewById(R.id.imageButton);
+        finalLocation = (Button) findViewById(R.id.regLocation);
 
         FragmentManager myFM = getSupportFragmentManager();
         fragment = (SupportMapFragment) myFM.findFragmentById(R.id.location_map);
         fragment.getMapAsync(this);
 
         //tohide
-        fragment.getView().setVisibility(View.INVISIBLE);
-        bSearch.setVisibility(View.INVISIBLE);
-        address.setVisibility(View.INVISIBLE);
+        hideYoWifeMap();
+        finalLocation.setVisibility(View.INVISIBLE);
+        bUploadImage.setEnabled(false);
 
         bSearch.setOnClickListener(this);
         imageToUpload.setOnClickListener(this);
         bUploadImage.setOnClickListener(this);
-        if (check_useCurrentLocation.isChecked()) {
-            check_useCurrentLocation.setChecked(false);
-        }
+        finalLocation.setOnClickListener(this);
+    }
+
+    /**
+     *
+     * @param
+     */
+    private void hideYoWifeMap() {
+        fragment.getView().setVisibility(View.INVISIBLE);
+        bSearch.setVisibility(View.INVISIBLE);
+        address.setVisibility(View.INVISIBLE);
+    }
+
+    /**
+     *
+     * @param
+     */
+    private void ShowYoKidsMap() {
+        fragment.getView().setVisibility(View.VISIBLE);
+        bSearch.setVisibility(View.VISIBLE);
+        address.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.regLocation:
+                hideYoWifeMap();
+                finalLocation.setVisibility(View.INVISIBLE);
+                Toast.makeText(this, "Location Registered!", Toast.LENGTH_LONG).show();
+                break;
             case R.id.imageToUpload:
                 Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI); // start the gallery picker
                 startActivityForResult(galleryIntent, RESULT_LOAD_IMAGE); // display the image over the gallery button
                 //TODO:KIM-CHI
                 //toShow
-                fragment.getView().setVisibility(View.VISIBLE);
-                bSearch.setVisibility(View.VISIBLE);
-                address.setVisibility(View.VISIBLE);
+                ShowYoKidsMap();
+                finalLocation.setVisibility(View.VISIBLE);
                 break;
             case R.id.bUploadImage:
                 Bitmap image = null;
@@ -135,15 +157,7 @@ public class AddPhoto extends AppCompatActivity implements View.OnClickListener,
                     if (image != null) {
                     String uploader = "Jihadi John-Li"; // todo retrieve current user here
                     if (currLat != 0 && currLon != 0) {
-                        /*
-                        if (check_useCurrentLocation.isChecked()) {
-                            Bundle extras = getIntent().getExtras();
-                            if (extras != null) {
-                                latitude = extras.getDouble("boom.realmaps.EXTRA_CURR_LATITUDE");
-                                longitutde = extras.getDouble("boom.realmaps.EXTRA_CURR_LONGITUDE");
-                            }
-                        }
-                        */
+                        //TODO: JOHN LI
                         addImage(new Image(uploader, image), currLat, currLon);
                     }
                 }
@@ -182,6 +196,8 @@ public class AddPhoto extends AppCompatActivity implements View.OnClickListener,
                         //takes keyboard out
                         //slider();
                         //mMap.animateCamera(CameraUpdateFactory.newLatLng(lat));
+
+                        bUploadImage.setEnabled(true);
                     }
                 } else {
                     //error popup message
@@ -286,6 +302,15 @@ public class AddPhoto extends AppCompatActivity implements View.OnClickListener,
         currLon = test.target.longitude;
         mMap.addMarker(new MarkerOptions().position(new LatLng(test.target.latitude, test.target.longitude)).icon(
                 BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+
+        bUploadImage.setEnabled(true);
+        //hideYoWifeMap();
+        //mMap.setLocation(false);
+        //mMap.addMarker(new MarkerOptions().position(new LatLng(currLat, currLon)).icon(
+                //BitmapDescriptorFactory.//fromResource(R.drawable.hand)));
+                //defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+
+
         return false;
     }
 
@@ -296,8 +321,8 @@ public class AddPhoto extends AppCompatActivity implements View.OnClickListener,
     @Override
     public void onLocationChanged(Location location) {
         //currLocation = location;
-        mMap.addMarker(new MarkerOptions().position(new LatLng(location.getLatitude(), location.getLongitude())).icon(
-                BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+        //mMap.addMarker(new MarkerOptions().position(new LatLng(location.getLatitude(), location.getLongitude())).icon(
+                //BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
     }
 
     @Override

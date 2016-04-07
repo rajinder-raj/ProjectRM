@@ -9,7 +9,8 @@
         android:background="@drawable/background"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:weightSum="1">
+        android:weightSum="1"
+        android:layout_alignParentEnd="true">
 
 
         <!-- Upload image section-->
@@ -19,26 +20,11 @@
             android:layout_width="156dp"
             android:layout_height="158dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/upload_name"
-            android:id="@+id/textView"
-            android:layout_gravity="center_horizontal" />
-
         <EditText
             android:id="@+id/etUploadName"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <CheckBox
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/upload_check_use_current_location"
-            android:id="@+id/useCurrLocation" />
+            android:text="Title" />
 
         <Button
             android:id="@+id/bUploadImage"
@@ -87,6 +73,13 @@
             android:layout_height="152dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Register Location"
+            android:id="@+id/regLocation"
+            android:layout_gravity="center_horizontal" />
 
     </LinearLayout>
 
