@@ -66,6 +66,8 @@ public class AddPhoto extends AppCompatActivity implements View.OnClickListener,
     private CheckBox check_useCurrentLocation;
     private File imageFile;
     private String mCurrentPhotoPath;
+    private EditText address;
+    private SupportMapFragment fragment;
 
     private double currLat = 0;
     private double currLon = 0;
@@ -89,14 +91,19 @@ public class AddPhoto extends AppCompatActivity implements View.OnClickListener,
         bUploadImage = (Button) findViewById(R.id.bUploadImage);
         uploadImageName = (EditText) findViewById(R.id.etUploadName);
         check_useCurrentLocation = (CheckBox) findViewById(R.id.useCurrLocation);
-
+        address = (EditText) findViewById(R.id.locationAddress);
         bSearch = (ImageButton) findViewById(R.id.imageButton);
-        bSearch.setOnClickListener(this);
 
         FragmentManager myFM = getSupportFragmentManager();
-        SupportMapFragment fragment = (SupportMapFragment) myFM.findFragmentById(R.id.location_map);
+        fragment = (SupportMapFragment) myFM.findFragmentById(R.id.location_map);
         fragment.getMapAsync(this);
 
+        //tohide
+        fragment.getView().setVisibility(View.INVISIBLE);
+        bSearch.setVisibility(View.INVISIBLE);
+        address.setVisibility(View.INVISIBLE);
+
+        bSearch.setOnClickListener(this);
         imageToUpload.setOnClickListener(this);
         bUploadImage.setOnClickListener(this);
         if (check_useCurrentLocation.isChecked()) {
@@ -110,6 +117,11 @@ public class AddPhoto extends AppCompatActivity implements View.OnClickListener,
             case R.id.imageToUpload:
                 Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI); // start the gallery picker
                 startActivityForResult(galleryIntent, RESULT_LOAD_IMAGE); // display the image over the gallery button
+                //TODO:KIM-CHI
+                //toShow
+                fragment.getView().setVisibility(View.VISIBLE);
+                bSearch.setVisibility(View.VISIBLE);
+                address.setVisibility(View.VISIBLE);
                 break;
             case R.id.bUploadImage:
                 Bitmap image = null;
@@ -121,7 +133,7 @@ public class AddPhoto extends AppCompatActivity implements View.OnClickListener,
                 catch (IOException e) {}
 
                     if (image != null) {
-                    String uploader = "raj"; // todo retrieve current user here
+                    String uploader = "Jihadi John-Li"; // todo retrieve current user here
                     if (currLat != 0 && currLon != 0) {
                         /*
                         if (check_useCurrentLocation.isChecked()) {
@@ -137,7 +149,6 @@ public class AddPhoto extends AppCompatActivity implements View.OnClickListener,
                 }
                 break;
             case R.id.imageButton:
-                EditText address = (EditText) findViewById(R.id.locationAddress);
                 String add = address.getText().toString();
                 List<Address> addressList = null;
 
