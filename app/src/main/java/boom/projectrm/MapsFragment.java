@@ -1,8 +1,11 @@
 package boom.projectrm;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
@@ -10,7 +13,13 @@ import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.Toast;
 
+import com.daimajia.slider.library.SliderLayout;
+import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.geofire.GeoFire;
@@ -31,17 +40,23 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Handler;
 
 /**
  * Created by Kim on 3/20/2016.
  */
-public class MapsFragment extends Fragment implements OnMapReadyCallback, GeoQueryEventListener,  GoogleMap.OnCameraChangeListener {
+public class MapsFragment extends Fragment implements OnMapReadyCallback, GeoQueryEventListener,  GoogleMap.OnCameraChangeListener, View.OnClickListener {
     private static final GeoLocation STARTUP_CENTER = new GeoLocation(51.03, 114.04);
     private static final int STARTUP_ZOOM_LEVEL = 14;
     private static final String FIREBASE_URL_PREFIX = "https://boomerango.firebaseio.com/";
+
+    private SliderLayout sliderShow;
+    private View view;
+    private ImageButton bSearch;
 
     private SupportMapFragment fragment;
     private Circle searchArea;
@@ -52,12 +67,14 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, GeoQue
     private Map<String, Marker> markers;
 
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        view = inflater.inflate(R.layout.fragment_one, container, false);
+        bSearch = (ImageButton) view.findViewById(R.id.button);
+        bSearch.setOnClickListener(this);
 
-        return inflater.inflate(R.layout.fragment_one, container, false);
+        return view;
 
     }
 
@@ -67,6 +84,9 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, GeoQue
         //FragmentManager fm = getFragmentManager();
         fragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.location_map);
         fragment.getMapAsync(this);
+
+        sliderShow = (SliderLayout) getActivity().findViewById(R.id.slider);
+        sliderIntro();
     }
 
 
@@ -90,13 +110,59 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, GeoQue
         setUpMap();
     }
 
+    public void sliderIntro() {
+        TextSliderView textSliderView = new TextSliderView(getActivity());
+        textSliderView
+                .description("Travel")
+                .image("http://www.exclusivegrouptravel.com/Careers/Beachchairs.jpg");
+
+        sliderShow.addSlider(textSliderView);
+    }
+
+    public void onClick(View v) {
+        EditText address = (EditText) getActivity().findViewById(R.id.locationAddress);
+        String add = address.getText().toString();
+        List<Address> addressList = null;
+
+        if(!add.isEmpty()) {
+            Geocoder geo = new Geocoder(getActivity());
+            if (add != null || !add.equals("")) {
+                try {
+                    addressList = geo.getFromLocationName(add, 1);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                Address address1 = addressList.get(0);
+
+                LatLng lat = new LatLng(address1.getLatitude(), address1.getLongitude());
+                mMap.addMarker(new MarkerOptions().position(lat).title("Marker"));
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(lat, 20.0f));
+                Toast.makeText(getActivity().getBaseContext(), "Found Location!", Toast.LENGTH_LONG).show();
+                //takes keyboard out
+                View view = getActivity().getCurrentFocus();
+                if (view != null) {
+                    InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                }
+                //TODO: implement if city zoom different size, if else closer
+                //takes keyboard out
+                //slider();
+                //mMap.animateCamera(CameraUpdateFactory.newLatLng(lat));
+            }
+        } else {
+            //error popup message
+            Toast.makeText(getActivity().getBaseContext(), "Please enter something", Toast.LENGTH_LONG).show();
+        }
+    }
+
     /**
      * When the map starts up create listener for geofire
      */
     @Override
     public void onStart() {
         super.onStart();
-
+        //query.addGeoQueryEventListener(this);
     }
 
     /**
@@ -174,10 +240,12 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, GeoQue
      */
     @Override
     public void onKeyMoved(String key, GeoLocation location) {
+
         Marker marker = this.markers.get(key);
         if (marker !=  null) {
             marker.setPosition(new LatLng(location.latitude, location.longitude));
         }
+
     }
 
     @Override
@@ -200,7 +268,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, GeoQue
     @Override
     public void onCameraChange(CameraPosition cameraPosition) {
         LatLng center = cameraPosition.target;
-        double radius = zoomLevelToRadius(cameraPosition.zoom);
+        double radius = zoomLevelToRadius(STARTUP_ZOOM_LEVEL);
         searchArea.setCenter(center);
         searchArea.setRadius(radius);
         query.setCenter(new GeoLocation(center.latitude, center.longitude));

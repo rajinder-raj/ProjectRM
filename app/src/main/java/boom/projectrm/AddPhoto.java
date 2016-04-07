@@ -3,21 +3,30 @@ package boom.projectrm;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationListener;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -25,25 +34,41 @@ import com.firebase.client.Firebase;
 import com.firebase.geofire.GeoFire;
 import com.firebase.geofire.GeoLocation;
 import com.firebase.geofire.GeoQuery;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
-public class AddPhoto extends AppCompatActivity implements View.OnClickListener {
+public class AddPhoto extends AppCompatActivity implements View.OnClickListener,
+        OnMapReadyCallback, GoogleMap.OnMyLocationButtonClickListener, LocationListener {
     private static final int RESULT_LOAD_IMAGE = 1;
     private static final int RESULT_CAMERA_START = 2;
+    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
     private static final int CAMERA_REQUEST = 1888;
     private Firebase fbdb;
     private GeoFire geofbdb;
+    private GoogleMap mMap;
     private ImageView imageToUpload;
     private Button bUploadImage;
+    private ImageButton bSearch;
     private EditText uploadImageName;
     private CheckBox check_useCurrentLocation;
     private File imageFile;
     private String mCurrentPhotoPath;
+
+    private double currLat = 0;
+    private double currLon = 0;
 
     private Uri currImage = null; // cheap way to pass back full size image path from gallery or camera
 
@@ -64,6 +89,13 @@ public class AddPhoto extends AppCompatActivity implements View.OnClickListener 
         bUploadImage = (Button) findViewById(R.id.bUploadImage);
         uploadImageName = (EditText) findViewById(R.id.etUploadName);
         check_useCurrentLocation = (CheckBox) findViewById(R.id.useCurrLocation);
+
+        bSearch = (ImageButton) findViewById(R.id.imageButton);
+        bSearch.setOnClickListener(this);
+
+        FragmentManager myFM = getSupportFragmentManager();
+        SupportMapFragment fragment = (SupportMapFragment) myFM.findFragmentById(R.id.location_map);
+        fragment.getMapAsync(this);
 
         imageToUpload.setOnClickListener(this);
         bUploadImage.setOnClickListener(this);
@@ -90,20 +122,96 @@ public class AddPhoto extends AppCompatActivity implements View.OnClickListener 
 
                     if (image != null) {
                     String uploader = "raj"; // todo retrieve current user here
-                    double latitude = 0.0;
-                    double longitutde = 0.0;
-
-                    if (check_useCurrentLocation.isChecked()) {
-                        Bundle extras = getIntent().getExtras();
-                        if (extras != null) {
-                            latitude = extras.getDouble("boom.realmaps.EXTRA_CURR_LATITUDE");
-                            longitutde = extras.getDouble("boom.realmaps.EXTRA_CURR_LONGITUDE");
+                    if (currLat != 0 && currLon != 0) {
+                        /*
+                        if (check_useCurrentLocation.isChecked()) {
+                            Bundle extras = getIntent().getExtras();
+                            if (extras != null) {
+                                latitude = extras.getDouble("boom.realmaps.EXTRA_CURR_LATITUDE");
+                                longitutde = extras.getDouble("boom.realmaps.EXTRA_CURR_LONGITUDE");
+                            }
                         }
+                        */
+                        addImage(new Image(uploader, image), currLat, currLon);
                     }
-                    addImage(new Image(uploader, image), latitude, longitutde);
                 }
                 break;
+            case R.id.imageButton:
+                EditText address = (EditText) findViewById(R.id.locationAddress);
+                String add = address.getText().toString();
+                List<Address> addressList = null;
+
+                if(!add.isEmpty()) {
+                    Geocoder geo = new Geocoder(this);
+                    if (add != null || !add.equals("")) {
+                        try {
+                            addressList = geo.getFromLocationName(add, 1);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                        Address address1 = addressList.get(0);
+
+                        LatLng lat = new LatLng(address1.getLatitude(), address1.getLongitude());
+                        currLat = address1.getLatitude();
+                        currLon = address1.getLongitude();
+                        mMap.addMarker(new MarkerOptions().position(new LatLng(address1.getLatitude(), address1.getLongitude())).icon(
+                                BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+                        //mMap.addMarker(new MarkerOptions().position(lat).title("Marker"));
+                        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(lat, 20.0f));
+
+                        Toast.makeText(this, "Found Location!", Toast.LENGTH_LONG).show();
+                        //takes keyboard out
+                        View view = getCurrentFocus();
+                        if (view != null) {
+                            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                        }
+                        //TODO: implement if city zoom different size, if else closer
+                        //takes keyboard out
+                        //slider();
+                        //mMap.animateCamera(CameraUpdateFactory.newLatLng(lat));
+                    }
+                } else {
+                    //error popup message
+                    Toast.makeText(this, "Please enter something", Toast.LENGTH_LONG).show();
+                }
         }
+
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        mMap.setMyLocationEnabled(true); //this is the my current location
+        mMap.setOnMyLocationButtonClickListener(this);
+        Geocoder geo = new Geocoder(this);
+        List<Address> addressList = null;
+        try {
+            addressList = geo.getFromLocationName("Calgary", 1);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Address address1 = addressList.get(0);
+
+        LatLng myCoordinates = new LatLng(address1.getLatitude(), address1.getLongitude());
+        CameraPosition cameraPosition = new CameraPosition.Builder()
+                .target(myCoordinates)      // Sets the center of the map to LatLng (refer to previous snippet)
+                .zoom(12)
+                .build();                   // Creates a CameraPosition from the builder
+        mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+        //mMap.setOnMyLocationButtonClickListener(googleMap.getMyLocation());
+        //mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
 
     }
 
@@ -151,11 +259,54 @@ public class AddPhoto extends AppCompatActivity implements View.OnClickListener 
         return geofbdb.queryAtLocation(new GeoLocation(latitude, longitude), radius);
     }
 
+    /**
+     * Callback interface for when the My Location button is clicked.
+     * Will set a message when the mylocation is clicked
+     * @return
+     */
+    @Override
+    public boolean onMyLocationButtonClick() {
 
+        Toast.makeText(this, "Your Current Location Found", Toast.LENGTH_SHORT).show();
+        // Return false so that we don't consume the event and the default behavior still occurs
+        // (the camera animates to the user's current position).
+        CameraPosition test = mMap.getCameraPosition();
+        currLat = test.target.latitude;
+        currLon = test.target.longitude;
+        mMap.addMarker(new MarkerOptions().position(new LatLng(test.target.latitude, test.target.longitude)).icon(
+                BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+        return false;
+    }
+
+    /**
+     * Called when the location has changed.
+     * @param location
+     */
+    @Override
+    public void onLocationChanged(Location location) {
+        //currLocation = location;
+        mMap.addMarker(new MarkerOptions().position(new LatLng(location.getLatitude(), location.getLongitude())).icon(
+                BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+
+    }
 
     public void dispatchTakePictureIntent(View view){
         Intent intent=new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(intent, CAMERA_REQUEST);
+        startActivityForResult(intent, RESULT_CAMERA_START);
         /*
         if(intent.resolveActivity(getPackageManager())!= null){
             File imageFile = null;
@@ -198,9 +349,15 @@ public class AddPhoto extends AppCompatActivity implements View.OnClickListener 
         super.onActivityResult(requestCode,resultCode, data);
 
 
-        if(resultCode != RESULT_CANCELED && data != null) { // handles issue with user ending camera app
-            if (requestCode == RESULT_LOAD_IMAGE || requestCode == RESULT_CAMERA_START && resultCode == RESULT_OK)
+        if(resultCode != RESULT_CANCELED) { // handles issue with user ending camera app
+            if (requestCode == RESULT_LOAD_IMAGE && data != null)
             {
+                Uri selectedImage = data.getData();
+                currImage = selectedImage; // passes back the fullsize image reference back to the main method
+
+                imageToUpload.setImageBitmap(decodeSampledBitmapFromUri(getRealPathFromURI(this, selectedImage), 156, 158));
+            }
+            else if (requestCode == RESULT_CAMERA_START && resultCode == RESULT_OK) {
                 Uri selectedImage = data.getData();
                 currImage = selectedImage; // passes back the fullsize image reference back to the main method
 

@@ -1,0 +1,252 @@
+04-04 01:24:49.096 16114-16297/boom.projectrm D/dalvikvm: GC_FOR_ALLOC freed 1684K, 13% free 63068K/72152K, paused 44ms, total 44ms
+04-04 01:24:52.580 16114-16297/boom.projectrm D/dalvikvm: GC_FOR_ALLOC freed 5672K, 14% free 64246K/74396K, paused 27ms, total 27ms
+04-04 01:24:54.482 16114-16297/boom.projectrm D/dalvikvm: GC_FOR_ALLOC freed 5643K, 14% free 65425K/75608K, paused 38ms, total 38ms
+04-04 01:24:56.083 16114-16297/boom.projectrm D/dalvikvm: GC_FOR_ALLOC freed 5555K, 14% free 66603K/76780K, paused 51ms, total 51ms
+04-04 01:24:57.144 16114-16297/boom.projectrm D/dalvikvm: GC_FOR_ALLOC freed 5598K, 14% free 67717K/77948K, paused 36ms, total 36ms
+04-04 01:24:57.855 16114-16297/boom.projectrm D/dalvikvm: GC_FOR_ALLOC freed 5528K, 13% free 68853K/79080K, paused 29ms, total 29ms
+04-04 01:24:58.416 16114-16297/boom.projectrm D/dalvikvm: GC_FOR_ALLOC freed 5489K, 13% free 69989K/80200K, paused 30ms, total 30ms
+04-04 01:24:58.876 16114-16297/boom.projectrm D/dalvikvm: GC_FOR_ALLOC freed 5441K, 13% free 71113K/81332K, paused 38ms, total 38ms
+04-04 01:24:59.276 16114-16297/boom.projectrm D/dalvikvm: GC_FOR_ALLOC freed 5442K, 13% free 72228K/82476K, paused 55ms, total 55ms
+04-04 01:24:59.617 16114-16297/boom.projectrm D/dalvikvm: GC_FOR_ALLOC freed 5307K, 13% free 73385K/83580K, paused 31ms, total 31ms
+04-04 01:24:59.927 16114-16297/boom.projectrm D/dalvikvm: GC_FOR_ALLOC freed 5372K, 13% free 74446K/84740K, paused 50ms, total 50ms
+04-04 01:25:00.207 16114-16297/boom.projectrm D/dalvikvm: GC_FOR_ALLOC freed 5285K, 12% free 75538K/85796K, paused 41ms, total 41ms
+04-04 01:25:00.468 16114-16297/boom.projectrm D/dalvikvm: GC_FOR_ALLOC freed 5199K, 12% free 76620K/86896K, paused 32ms, total 32ms
+04-04 01:25:00.808 16114-16297/boom.projectrm D/dalvikvm: GC_FOR_ALLOC freed 5130K, 12% free 77680K/87984K, paused 77ms, total 77ms
+04-04 01:25:00.978 16114-16297/boom.projectrm D/dalvikvm: GC_FOR_ALLOC freed 4413K, 12% free 79113K/89020K, paused 38ms, total 38ms
+04-04 01:25:01.088 16114-16264/boom.projectrm D/dalvikvm: GC_FOR_ALLOC freed 2663K, 12% free 80381K/90380K, paused 55ms, total 55ms
+04-04 01:25:01.148 16114-16264/boom.projectrm D/dalvikvm: GC_FOR_ALLOC freed 1862K, 11% free 81792K/91412K, paused 34ms, total 34ms
+04-04 01:25:01.328 16114-16264/boom.projectrm D/dalvikvm: GC_FOR_ALLOC freed 4769K, 12% free 85629K/96836K, paused 62ms, total 62ms
+04-04 01:25:01.408 16114-16264/boom.projectrm D/dalvikvm: GC_FOR_ALLOC freed 1552K, 11% free 86975K/96836K, paused 48ms, total 48ms
+04-04 01:25:01.488 16114-16264/boom.projectrm D/dalvikvm: GC_FOR_ALLOC freed 2328K, 10% free 88482K/97868K, paused 34ms, total 34ms
+04-04 01:25:01.719 16114-16264/boom.projectrm D/dalvikvm: GC_FOR_ALLOC freed 4174K, 10% free 93447K/103636K, paused 73ms, total 73ms
+04-04 01:25:01.829 16114-16297/boom.projectrm D/dalvikvm: GC_FOR_ALLOC freed 3029K, 10% free 95126K/104792K, paused 49ms, total 49ms
+04-04 01:25:01.919 16114-16297/boom.projectrm D/dalvikvm: GC_FOR_ALLOC freed 2130K, 9% free 97092K/106456K, paused 36ms, total 36ms
+04-04 01:25:02.079 16114-16264/boom.projectrm D/dalvikvm: GC_FOR_ALLOC freed 599K, 9% free 98735K/108004K, paused 72ms, total 72ms
+04-04 01:25:02.129 16114-16264/boom.projectrm I/dalvikvm-heap: Grow heap (frag case) to 115.688MB for 12763464-byte allocation
+04-04 01:25:02.229 16114-16264/boom.projectrm D/dalvikvm: GC_FOR_ALLOC freed 12288K, 18% free 98911K/120472K, paused 46ms, total 46ms
+04-04 01:25:02.349 16114-16264/boom.projectrm D/dalvikvm: GC_FOR_ALLOC freed 1536K, 16% free 102012K/120472K, paused 40ms, total 40ms
+04-04 01:25:02.459 16114-16264/boom.projectrm W/PersistentConnection: pc_0 - Using an unspecified index. Consider adding '".indexOn": "g"' at /imagesV2 to your security and Firebase rules for better performance
+04-04 01:25:02.620 16114-16297/boom.projectrm D/dalvikvm: GC_FOR_ALLOC freed 26119K, 31% free 84063K/120472K, paused 75ms, total 75ms
+04-04 01:25:02.910 16114-16297/boom.projectrm D/dalvikvm: GC_FOR_ALLOC freed 6771K, 30% free 85455K/120472K, paused 45ms, total 45ms
+04-04 01:25:03.320 16114-16297/boom.projectrm D/dalvikvm: GC_FOR_ALLOC freed 6754K, 28% free 86858K/120472K, paused 49ms, total 49ms
+04-04 01:25:03.771 16114-16297/boom.projectrm D/dalvikvm: GC_FOR_ALLOC freed 6773K, 27% free 88252K/120472K, paused 42ms, total 42ms
+04-04 01:25:04.181 16114-16297/boom.projectrm D/dalvikvm: GC_FOR_ALLOC freed 6755K, 26% free 89655K/120472K, paused 47ms, total 47ms
+04-04 01:25:04.612 16114-16297/boom.projectrm D/dalvikvm: GC_FOR_ALLOC freed 6770K, 25% free 91047K/120472K, paused 56ms, total 56ms
+04-04 01:25:05.042 16114-16297/boom.projectrm D/dalvikvm: GC_FOR_ALLOC freed 6754K, 24% free 92450K/120472K, paused 52ms, total 52ms
+04-04 01:25:05.412 16114-16297/boom.projectrm D/dalvikvm: GC_FOR_ALLOC freed 6772K, 23% free 93843K/120472K, paused 42ms, total 42ms
+04-04 01:25:05.823 16114-16297/boom.projectrm D/dalvikvm: GC_FOR_ALLOC freed 6754K, 21% free 95247K/120472K, paused 45ms, total 45ms
+04-04 01:25:06.243 16114-16297/boom.projectrm D/dalvikvm: GC_FOR_ALLOC freed 6769K, 20% free 96639K/120472K, paused 70ms, total 70ms
+04-04 01:25:06.603 16114-16297/boom.projectrm D/dalvikvm: GC_FOR_ALLOC freed 6754K, 19% free 98042K/120472K, paused 38ms, total 38ms
+04-04 01:25:06.774 16114-16264/boom.projectrm D/dalvikvm: GC_FOR_ALLOC freed 4153K, 16% free 101865K/120472K, paused 31ms, total 31ms
+04-04 01:25:06.964 16114-16264/boom.projectrm D/dalvikvm: GC_FOR_ALLOC freed <1K, 11% free 108009K/120472K, paused 64ms, total 64ms
+04-04 01:25:06.964 16114-16264/boom.projectrm I/dalvikvm-heap: Grow heap (frag case) to 111.073MB for 524304-byte allocation
+04-04 01:25:07.104 16114-16264/boom.projectrm D/dalvikvm: GC_FOR_ALLOC freed 0K, 11% free 110057K/122536K, paused 77ms, total 77ms
+04-04 01:25:07.224 16114-16264/boom.projectrm I/dalvikvm-heap: Clamp target GC heap from 129.074MB to 128.000MB
+04-04 01:25:07.224 16114-16264/boom.projectrm D/dalvikvm: GC_FOR_ALLOC freed <1K, 10% free 112617K/125116K, paused 36ms, total 36ms
+04-04 01:25:07.284 16114-16264/boom.projectrm I/dalvikvm-heap: Clamp target GC heap from 130.074MB to 128.000MB
+04-04 01:25:07.284 16114-16264/boom.projectrm D/dalvikvm: GC_FOR_ALLOC freed 0K, 10% free 113642K/126148K, paused 43ms, total 43ms
+04-04 01:25:07.284 16114-16264/boom.projectrm I/dalvikvm-heap: Forcing collection of SoftReferences for 12763464-byte allocation
+04-04 01:25:07.344 16114-16264/boom.projectrm I/dalvikvm-heap: Clamp target GC heap from 130.065MB to 128.000MB
+04-04 01:25:07.344 16114-16264/boom.projectrm D/dalvikvm: GC_BEFORE_OOM freed 78K, 10% free 113563K/126148K, paused 60ms, total 60ms
+04-04 01:25:07.344 16114-16264/boom.projectrm E/dalvikvm-heap: Out of memory on a 12763464-byte allocation.
+04-04 01:25:07.344 16114-16264/boom.projectrm I/dalvikvm: "FirebaseWorker" daemon prio=5 tid=30 RUNNABLE
+04-04 01:25:07.344 16114-16264/boom.projectrm I/dalvikvm:   | group="main" sCount=0 dsCount=0 obj=0x42b20d78 self=0x7b08a008
+04-04 01:25:07.344 16114-16264/boom.projectrm I/dalvikvm:   | sysTid=16264 nice=0 sched=0/0 cgrp=apps handle=2064163936
+04-04 01:25:07.344 16114-16264/boom.projectrm I/dalvikvm:   | state=R schedstat=( 0 0 0 ) utm=158 stm=28 core=3
+04-04 01:25:07.354 16114-16264/boom.projectrm I/dalvikvm:     at java.lang.AbstractStringBuilder.<init>(AbstractStringBuilder.java:~82)
+04-04 01:25:07.354 16114-16264/boom.projectrm I/dalvikvm:     at java.lang.StringBuilder.<init>(StringBuilder.java:67)
+04-04 01:25:07.354 16114-16264/boom.projectrm I/dalvikvm:     at com.fasterxml.jackson.core.util.TextBuffer.contentsAsString(TextBuffer.java:350)
+04-04 01:25:07.354 16114-16264/boom.projectrm I/dalvikvm:     at com.fasterxml.jackson.core.json.ReaderBasedJsonParser.getText(ReaderBasedJsonParser.java:207)
+04-04 01:25:07.354 16114-16264/boom.projectrm I/dalvikvm:     at com.fasterxml.jackson.databind.deser.std.UntypedObjectDeserializer.deserialize(UntypedObjectDeserializer.java:59)
+04-04 01:25:07.354 16114-16264/boom.projectrm I/dalvikvm:     at com.fasterxml.jackson.databind.deser.std.UntypedObjectDeserializer.mapObject(UntypedObjectDeserializer.java:203)
+04-04 01:25:07.354 16114-16264/boom.projectrm I/dalvikvm:     at com.fasterxml.jackson.databind.deser.std.UntypedObjectDeserializer.deserialize(UntypedObjectDeserializer.java:51)
+04-04 01:25:07.354 16114-16264/boom.projectrm I/dalvikvm:     at com.fasterxml.jackson.databind.deser.std.UntypedObjectDeserializer.mapObject(UntypedObjectDeserializer.java:225)
+04-04 01:25:07.354 16114-16264/boom.projectrm I/dalvikvm:     at com.fasterxml.jackson.databind.deser.std.UntypedObjectDeserializer.deserialize(UntypedObjectDeserializer.java:51)
+04-04 01:25:07.354 16114-16264/boom.projectrm I/dalvikvm:     at com.fasterxml.jackson.databind.deser.std.UntypedObjectDeserializer.mapObject(UntypedObjectDeserializer.java:225)
+04-04 01:25:07.354 16114-16264/boom.projectrm I/dalvikvm:     at com.fasterxml.jackson.databind.deser.std.UntypedObjectDeserializer.deserialize(UntypedObjectDeserializer.java:51)
+04-04 01:25:07.354 16114-16264/boom.projectrm I/dalvikvm:     at com.fasterxml.jackson.databind.deser.std.UntypedObjectDeserializer.mapObject(UntypedObjectDeserializer.java:211)
+04-04 01:25:07.354 16114-16264/boom.projectrm I/dalvikvm:     at com.fasterxml.jackson.databind.deser.std.UntypedObjectDeserializer.deserialize(UntypedObjectDeserializer.java:51)
+04-04 01:25:07.354 16114-16264/boom.projectrm I/dalvikvm:     at com.fasterxml.jackson.databind.deser.std.UntypedObjectDeserializer.mapObject(UntypedObjectDeserializer.java:203)
+04-04 01:25:07.354 16114-16264/boom.projectrm I/dalvikvm:     at com.fasterxml.jackson.databind.deser.std.UntypedObjectDeserializer.deserialize(UntypedObjectDeserializer.java:51)
+04-04 01:25:07.354 16114-16264/boom.projectrm I/dalvikvm:     at com.fasterxml.jackson.databind.deser.std.MapDeserializer._readAndBindStringMap(MapDeserializer.java:432)
+04-04 01:25:07.354 16114-16264/boom.projectrm I/dalvikvm:     at com.fasterxml.jackson.databind.deser.std.MapDeserializer.deserialize(MapDeserializer.java:314)
+04-04 01:25:07.354 16114-16264/boom.projectrm I/dalvikvm:     at com.fasterxml.jackson.databind.deser.std.MapDeserializer.deserialize(MapDeserializer.java:26)
+04-04 01:25:07.354 16114-16264/boom.projectrm I/dalvikvm:     at com.fasterxml.jackson.databind.ObjectMapper._readMapAndClose(ObjectMapper.java:2888)
+04-04 01:25:07.354 16114-16264/boom.projectrm I/dalvikvm:     at com.fasterxml.jackson.databind.ObjectMapper.readValue(ObjectMapper.java:2071)
+04-04 01:25:07.354 16114-16264/boom.projectrm I/dalvikvm:     at com.firebase.client.realtime.WebsocketConnection.appendFrame(WebsocketConnection.java:221)
+04-04 01:25:07.354 16114-16264/boom.projectrm I/dalvikvm:     at com.firebase.client.realtime.WebsocketConnection.handleIncomingFrame(WebsocketConnection.java:265)
+04-04 01:25:07.354 16114-16264/boom.projectrm I/dalvikvm:     at com.firebase.client.realtime.WebsocketConnection.access$500(WebsocketConnection.java:27)
+04-04 01:25:07.354 16114-16264/boom.projectrm I/dalvikvm:     at com.firebase.client.realtime.WebsocketConnection$WSClientTubesock$2.run(WebsocketConnection.java:72)
+04-04 01:25:07.354 16114-16264/boom.projectrm I/dalvikvm:     at com.firebase.client.utilities.DefaultRunLoop$1.run(DefaultRunLoop.java:54)
+04-04 01:25:07.354 16114-16264/boom.projectrm I/dalvikvm:     at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:422)
+04-04 01:25:07.354 16114-16264/boom.projectrm I/dalvikvm:     at java.util.concurrent.FutureTask.run(FutureTask.java:237)
+04-04 01:25:07.354 16114-16264/boom.projectrm I/dalvikvm:     at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:152)
+04-04 01:25:07.354 16114-16264/boom.projectrm I/dalvikvm:     at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:265)
+04-04 01:25:07.354 16114-16264/boom.projectrm I/dalvikvm:     at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1112)
+04-04 01:25:07.354 16114-16264/boom.projectrm I/dalvikvm:     at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:587)
+04-04 01:25:07.354 16114-16264/boom.projectrm I/dalvikvm:     at java.lang.Thread.run(Thread.java:841)
+04-04 01:25:07.354 16114-16264/boom.projectrm E/RunLoop: Uncaught exception in Firebase runloop (2.5.2). Please report to support@firebase.com
+                                                         java.lang.OutOfMemoryError
+                                                             at java.lang.AbstractStringBuilder.<init>(AbstractStringBuilder.java:82)
+                                                             at java.lang.StringBuilder.<init>(StringBuilder.java:67)
+                                                             at com.fasterxml.jackson.core.util.TextBuffer.contentsAsString(TextBuffer.java:350)
+                                                             at com.fasterxml.jackson.core.json.ReaderBasedJsonParser.getText(ReaderBasedJsonParser.java:207)
+                                                             at com.fasterxml.jackson.databind.deser.std.UntypedObjectDeserializer.deserialize(UntypedObjectDeserializer.java:59)
+                                                             at com.fasterxml.jackson.databind.deser.std.UntypedObjectDeserializer.mapObject(UntypedObjectDeserializer.java:203)
+                                                             at com.fasterxml.jackson.databind.deser.std.UntypedObjectDeserializer.deserialize(UntypedObjectDeserializer.java:51)
+                                                             at com.fasterxml.jackson.databind.deser.std.UntypedObjectDeserializer.mapObject(UntypedObjectDeserializer.java:225)
+                                                             at com.fasterxml.jackson.databind.deser.std.UntypedObjectDeserializer.deserialize(UntypedObjectDeserializer.java:51)
+                                                             at com.fasterxml.jackson.databind.deser.std.UntypedObjectDeserializer.mapObject(UntypedObjectDeserializer.java:225)
+                                                             at com.fasterxml.jackson.databind.deser.std.UntypedObjectDeserializer.deserialize(UntypedObjectDeserializer.java:51)
+                                                             at com.fasterxml.jackson.databind.deser.std.UntypedObjectDeserializer.mapObject(UntypedObjectDeserializer.java:211)
+                                                             at com.fasterxml.jackson.databind.deser.std.UntypedObjectDeserializer.deserialize(UntypedObjectDeserializer.java:51)
+                                                             at com.fasterxml.jackson.databind.deser.std.UntypedObjectDeserializer.mapObject(UntypedObjectDeserializer.java:203)
+                                                             at com.fasterxml.jackson.databind.deser.std.UntypedObjectDeserializer.deserialize(UntypedObjectDeserializer.java:51)
+                                                             at com.fasterxml.jackson.databind.deser.std.MapDeserializer._readAndBindStringMap(MapDeserializer.java:432)
+                                                             at com.fasterxml.jackson.databind.deser.std.MapDeserializer.deserialize(MapDeserializer.java:314)
+                                                             at com.fasterxml.jackson.databind.deser.std.MapDeserializer.deserialize(MapDeserializer.java:26)
+                                                             at com.fasterxml.jackson.databind.ObjectMapper._readMapAndClose(ObjectMapper.java:2888)
+                                                             at com.fasterxml.jackson.databind.ObjectMapper.readValue(ObjectMapper.java:2071)
+                                                             at com.firebase.client.realtime.WebsocketConnection.appendFrame(WebsocketConnection.java:221)
+                                                             at com.firebase.client.realtime.WebsocketConnection.handleIncomingFrame(WebsocketConnection.java:265)
+                                                             at com.firebase.client.realtime.WebsocketConnection.access$500(WebsocketConnection.java:27)
+                                                             at com.firebase.client.realtime.WebsocketConnection$WSClientTubesock$2.run(WebsocketConnection.java:72)
+                                                             at com.firebase.client.utilities.DefaultRunLoop$1.run(DefaultRunLoop.java:54)
+                                                             at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:422)
+                                                             at java.util.concurrent.FutureTask.run(FutureTask.java:237)
+                                                             at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:152)
+                                                             at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:265)
+                                                             at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1112)
+                                                             at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:587)
+                                                             at java.lang.Thread.run(Thread.java:841)
+04-04 01:25:07.364 16114-16114/boom.projectrm D/AndroidRuntime: Shutting down VM
+04-04 01:25:07.364 16114-16114/boom.projectrm W/dalvikvm: threadid=1: thread exiting with uncaught exception (group=0x41840da0)
+04-04 01:25:07.364 16114-16264/boom.projectrm E/RunLoop: Uncaught exception in Firebase runloop (2.5.2). Please report to support@firebase.com
+                                                         java.lang.IllegalStateException: Trying to add string after reading
+                                                             at com.firebase.client.realtime.util.StringListReader.addString(StringListReader.java:28)
+                                                             at com.firebase.client.realtime.WebsocketConnection.appendFrame(WebsocketConnection.java:215)
+                                                             at com.firebase.client.realtime.WebsocketConnection.handleIncomingFrame(WebsocketConnection.java:265)
+                                                             at com.firebase.client.realtime.WebsocketConnection.access$500(WebsocketConnection.java:27)
+                                                             at com.firebase.client.realtime.WebsocketConnection$WSClientTubesock$2.run(WebsocketConnection.java:72)
+                                                             at com.firebase.client.utilities.DefaultRunLoop$1.run(DefaultRunLoop.java:54)
+                                                             at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:422)
+                                                             at java.util.concurrent.FutureTask.run(FutureTask.java:237)
+                                                             at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:152)
+                                                             at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:265)
+                                                             at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1112)
+                                                             at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:587)
+                                                             at java.lang.Thread.run(Thread.java:841)
+04-04 01:25:07.364 16114-16264/boom.projectrm E/RunLoop: Uncaught exception in Firebase runloop (2.5.2). Please report to support@firebase.com
+                                                         java.lang.IllegalStateException: Trying to add string after reading
+                                                             at com.firebase.client.realtime.util.StringListReader.addString(StringListReader.java:28)
+                                                             at com.firebase.client.realtime.WebsocketConnection.appendFrame(WebsocketConnection.java:215)
+                                                             at com.firebase.client.realtime.WebsocketConnection.handleIncomingFrame(WebsocketConnection.java:265)
+                                                             at com.firebase.client.realtime.WebsocketConnection.access$500(WebsocketConnection.java:27)
+                                                             at com.firebase.client.realtime.WebsocketConnection$WSClientTubesock$2.run(WebsocketConnection.java:72)
+                                                             at com.firebase.client.utilities.DefaultRunLoop$1.run(DefaultRunLoop.java:54)
+                                                             at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:422)
+                                                             at java.util.concurrent.FutureTask.run(FutureTask.java:237)
+                                                             at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:152)
+                                                             at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:265)
+                                                             at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1112)
+                                                             at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:587)
+                                                             at java.lang.Thread.run(Thread.java:841)
+04-04 01:25:07.374 16114-16264/boom.projectrm E/RunLoop: Uncaught exception in Firebase runloop (2.5.2). Please report to support@firebase.com
+                                                         java.lang.IllegalStateException: Trying to add string after reading
+                                                             at com.firebase.client.realtime.util.StringListReader.addString(StringListReader.java:28)
+                                                             at com.firebase.client.realtime.WebsocketConnection.appendFrame(WebsocketConnection.java:215)
+                                                             at com.firebase.client.realtime.WebsocketConnection.handleIncomingFrame(WebsocketConnection.java:265)
+                                                             at com.firebase.client.realtime.WebsocketConnection.access$500(WebsocketConnection.java:27)
+                                                             at com.firebase.client.realtime.WebsocketConnection$WSClientTubesock$2.run(WebsocketConnection.java:72)
+                                                             at com.firebase.client.utilities.DefaultRunLoop$1.run(DefaultRunLoop.java:54)
+                                                             at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:422)
+                                                             at java.util.concurrent.FutureTask.run(FutureTask.java:237)
+                                                             at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:152)
+                                                             at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:265)
+                                                             at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1112)
+                                                             at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:587)
+                                                             at java.lang.Thread.run(Thread.java:841)
+04-04 01:25:07.384 16114-16114/boom.projectrm E/AndroidRuntime: FATAL EXCEPTION: main
+                                                                Process: boom.projectrm, PID: 16114
+                                                                java.lang.RuntimeException: Uncaught exception in Firebase runloop (2.5.2). Please report to support@firebase.com
+                                                                    at com.firebase.client.android.AndroidPlatform$1$1.run(AndroidPlatform.java:49)
+                                                                    at android.os.Handler.handleCallback(Handler.java:733)
+                                                                    at android.os.Handler.dispatchMessage(Handler.java:95)
+                                                                    at android.os.Looper.loop(Looper.java:146)
+                                                                    at android.app.ActivityThread.main(ActivityThread.java:5635)
+                                                                    at java.lang.reflect.Method.invokeNative(Native Method)
+                                                                    at java.lang.reflect.Method.invoke(Method.java:515)
+                                                                    at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:1291)
+                                                                    at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:1107)
+                                                                    at dalvik.system.NativeStart.main(Native Method)
+                                                                 Caused by: java.lang.OutOfMemoryError
+                                                                    at java.lang.AbstractStringBuilder.<init>(AbstractStringBuilder.java:82)
+                                                                    at java.lang.StringBuilder.<init>(StringBuilder.java:67)
+                                                                    at com.fasterxml.jackson.core.util.TextBuffer.contentsAsString(TextBuffer.java:350)
+                                                                    at com.fasterxml.jackson.core.json.ReaderBasedJsonParser.getText(ReaderBasedJsonParser.java:207)
+                                                                    at com.fasterxml.jackson.databind.deser.std.UntypedObjectDeserializer.deserialize(UntypedObjectDeserializer.java:59)
+                                                                    at com.fasterxml.jackson.databind.deser.std.UntypedObjectDeserializer.mapObject(UntypedObjectDeserializer.java:203)
+                                                                    at com.fasterxml.jackson.databind.deser.std.UntypedObjectDeserializer.deserialize(UntypedObjectDeserializer.java:51)
+                                                                    at com.fasterxml.jackson.databind.deser.std.UntypedObjectDeserializer.mapObject(UntypedObjectDeserializer.java:225)
+                                                                    at com.fasterxml.jackson.databind.deser.std.UntypedObjectDeserializer.deserialize(UntypedObjectDeserializer.java:51)
+                                                                    at com.fasterxml.jackson.databind.deser.std.UntypedObjectDeserializer.mapObject(UntypedObjectDeserializer.java:225)
+                                                                    at com.fasterxml.jackson.databind.deser.std.UntypedObjectDeserializer.deserialize(UntypedObjectDeserializer.java:51)
+                                                                    at com.fasterxml.jackson.databind.deser.std.UntypedObjectDeserializer.mapObject(UntypedObjectDeserializer.java:211)
+                                                                    at com.fasterxml.jackson.databind.deser.std.UntypedObjectDeserializer.deserialize(UntypedObjectDeserializer.java:51)
+                                                                    at com.fasterxml.jackson.databind.deser.std.UntypedObjectDeserializer.mapObject(UntypedObjectDeserializer.java:203)
+                                                                    at com.fasterxml.jackson.databind.deser.std.UntypedObjectDeserializer.deserialize(UntypedObjectDeserializer.java:51)
+                                                                    at com.fasterxml.jackson.databind.deser.std.MapDeserializer._readAndBindStringMap(MapDeserializer.java:432)
+                                                                    at com.fasterxml.jackson.databind.deser.std.MapDeserializer.deserialize(MapDeserializer.java:314)
+                                                                    at com.fasterxml.jackson.databind.deser.std.MapDeserializer.deserialize(MapDeserializer.java:26)
+                                                                    at com.fasterxml.jackson.databind.ObjectMapper._readMapAndClose(ObjectMapper.java:2888)
+                                                                    at com.fasterxml.jackson.databind.ObjectMapper.readValue(ObjectMapper.java:2071)
+                                                                    at com.firebase.client.realtime.WebsocketConnection.appendFrame(WebsocketConnection.java:221)
+                                                                    at com.firebase.client.realtime.WebsocketConnection.handleIncomingFrame(WebsocketConnection.java:265)
+                                                                    at com.firebase.client.realtime.WebsocketConnection.access$500(WebsocketConnection.java:27)
+                                                                    at com.firebase.client.realtime.WebsocketConnection$WSClientTubesock$2.run(WebsocketConnection.java:72)
+                                                                    at com.firebase.client.utilities.DefaultRunLoop$1.run(DefaultRunLoop.java:54)
+                                                                    at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:422)
+                                                                    at java.util.concurrent.FutureTask.run(FutureTask.java:237)
+                                                                    at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:152)
+                                                                    at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:265)
+                                                                    at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1112)
+                                                                    at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:587)
+                                                                    at java.lang.Thread.run(Thread.java:841)
+04-04 01:25:11.809 16114-16114/boom.projectrm I/Process: Sending signal. PID: 16114 SIG: 9
+
+
+
+04-04 01:40:46.551 27681-27681/boom.projectrm D/AndroidRuntime: Shutting down VM
+04-04 01:40:46.551 27681-27681/boom.projectrm W/dalvikvm: threadid=1: thread exiting with uncaught exception (group=0x41840da0)
+04-04 01:40:46.611 27681-27681/boom.projectrm E/AndroidRuntime: FATAL EXCEPTION: main
+                                                                Process: boom.projectrm, PID: 27681
+                                                                java.lang.RuntimeException: Failure delivering result ResultInfo{who=null, request=2, result=-1, data=null} to activity {boom.projectrm/boom.projectrm.AddPhoto}: java.lang.NullPointerException
+                                                                    at android.app.ActivityThread.deliverResults(ActivityThread.java:3714)
+                                                                    at android.app.ActivityThread.handleSendResult(ActivityThread.java:3757)
+                                                                    at android.app.ActivityThread.access$1400(ActivityThread.java:170)
+                                                                    at android.app.ActivityThread$H.handleMessage(ActivityThread.java:1352)
+                                                                    at android.os.Handler.dispatchMessage(Handler.java:102)
+                                                                    at android.os.Looper.loop(Looper.java:146)
+                                                                    at android.app.ActivityThread.main(ActivityThread.java:5635)
+                                                                    at java.lang.reflect.Method.invokeNative(Native Method)
+                                                                    at java.lang.reflect.Method.invoke(Method.java:515)
+                                                                    at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:1291)
+                                                                    at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:1107)
+                                                                    at dalvik.system.NativeStart.main(Native Method)
+                                                                 Caused by: java.lang.NullPointerException
+                                                                    at boom.projectrm.AddPhoto.onActivityResult(AddPhoto.java:198)
+                                                                    at android.app.Activity.dispatchActivityResult(Activity.java:5778)
+                                                                    at android.app.ActivityThread.deliverResults(ActivityThread.java:3710)
+                                                                    at android.app.ActivityThread.handleSendResult(ActivityThread.java:3757) 
+                                                                    at android.app.ActivityThread.access$1400(ActivityThread.java:170) 
+                                                                    at android.app.ActivityThread$H.handleMessage(ActivityThread.java:1352) 
+                                                                    at android.os.Handler.dispatchMessage(Handler.java:102) 
+                                                                    at android.os.Looper.loop(Looper.java:146) 
+                                                                    at android.app.ActivityThread.main(ActivityThread.java:5635) 
+                                                                    at java.lang.reflect.Method.invokeNative(Native Method) 
+                                                                    at java.lang.reflect.Method.invoke(Method.java:515) 
+                                                                    at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:1291) 
+                                                                    at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:1107) 
+                                                                    at dalvik.system.NativeStart.main(Native Method) 
+04-04 01:40:46.651 27681-27744/boom.projectrm D/dalvikvm: GC_FOR_ALLOC freed 2588K, 15% free 93160K/108464K, paused 38ms, total 38ms
+04-04 01:40:46.841 27681-27744/boom.projectrm D/dalvikvm: GC_FOR_ALLOC freed 3K, 12% free 95721K/108464K, paused 66ms, total 66ms

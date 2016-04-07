@@ -52,6 +52,42 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="dispatchTakePictureIntent" />
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true" >
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:id="@+id/locationAddress"
+                android:layout_alignParentStart="true"
+                android:layout_toStartOf="@+id/imageButton"
+                android:hint="Lookup a location" />
+
+            <ImageButton
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:id="@+id/imageButton"
+                android:src="@android:drawable/ic_menu_search"
+                android:layout_alignParentEnd="true" />
+        </RelativeLayout>
+
+        <fragment
+            class="com.google.android.gms.maps.SupportMapFragment"
+            tools:context=".MainActivity"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/location_map"
+            android:layout_width="match_parent"
+            android:layout_height="152dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true" />
+
     </LinearLayout>
 
 </RelativeLayout>
