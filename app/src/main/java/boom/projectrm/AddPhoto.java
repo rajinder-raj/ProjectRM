@@ -13,6 +13,7 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
+import android.location.LocationManager;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
@@ -69,6 +70,19 @@ public class AddPhoto extends AppCompatActivity implements View.OnClickListener,
     private EditText address;
     private SupportMapFragment fragment;
 
+
+    protected LocationManager locationManager;
+
+    private Location location;
+
+    private boolean isGPSenabled = false;
+    private boolean isNetworkEnabled = false;
+    private boolean canGetLocation = false;
+
+    private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10;
+    private static final long MIN_TIME_BW_UPDATES = 1000*600*1;
+
+
     private double currLat = 0;
     private double currLon = 0;
 
@@ -83,8 +97,8 @@ public class AddPhoto extends AppCompatActivity implements View.OnClickListener,
 
         // Firebase initial setup
         Firebase.setAndroidContext(this);
-        fbdb = new Firebase("https://boomerango.firebaseio.com/imagesV2");
-        geofbdb = new GeoFire(fbdb);
+        fbdb = MainActivity.fbdb;
+        geofbdb = MainActivity.geofbdb;
 
         // set buttons and listeners
         imageToUpload = (ImageView) findViewById(R.id.imageToUpload);
@@ -129,6 +143,8 @@ public class AddPhoto extends AppCompatActivity implements View.OnClickListener,
         address.setVisibility(View.VISIBLE);
     }
 
+
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -155,9 +171,8 @@ public class AddPhoto extends AppCompatActivity implements View.OnClickListener,
                 catch (IOException e) {}
 
                     if (image != null) {
-                    String uploader = "Jihadi John-Li"; // todo retrieve current user here
+                    String uploader = "ryan leford"; // todo retrieve current user here
                     if (currLat != 0 && currLon != 0) {
-                        //TODO: JOHN LI
                         addImage(new Image(uploader, image), currLat, currLon);
                     }
                 }
@@ -231,7 +246,10 @@ public class AddPhoto extends AppCompatActivity implements View.OnClickListener,
         }
         Address address1 = addressList.get(0);
 
-        LatLng myCoordinates = new LatLng(address1.getLatitude(), address1.getLongitude());
+
+
+
+        LatLng myCoordinates = new LatLng(getLocation().getLatitude(), getLocation().getLongitude());
         CameraPosition cameraPosition = new CameraPosition.Builder()
                 .target(myCoordinates)      // Sets the center of the map to LatLng (refer to previous snippet)
                 .zoom(12)
@@ -240,6 +258,66 @@ public class AddPhoto extends AppCompatActivity implements View.OnClickListener,
         //mMap.setOnMyLocationButtonClickListener(googleMap.getMyLocation());
         //mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
 
+    }
+
+    public Location getLocation(){
+        try{
+            locationManager = (LocationManager) getApplicationContext().getSystemService(LOCATION_SERVICE);
+
+            isGPSenabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+
+            isNetworkEnabled = locationManager.isProviderEnabled(locationManager.NETWORK_PROVIDER);
+
+            if(!isGPSenabled && isNetworkEnabled){
+
+            }
+            else
+                this.canGetLocation = true;
+
+                if(isNetworkEnabled)
+                {
+                    locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
+                            MIN_TIME_BW_UPDATES,
+                            MIN_DISTANCE_CHANGE_FOR_UPDATES,
+                            this);
+                }
+            if(locationManager != null)
+            {
+                location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+
+                if(location != null){
+                    currLat = location.getLatitude();
+                    currLon = location.getLongitude();
+                }
+            }
+
+            if(isGPSenabled)
+            {
+                if(location == null) {
+                    locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
+                            MIN_TIME_BW_UPDATES,
+                            MIN_DISTANCE_CHANGE_FOR_UPDATES,
+                            this);
+                    if(locationManager != null)
+                    {
+                        location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+
+                        if(location != null){
+                            currLat = location.getLatitude();
+                            currLon = location.getLongitude();
+                        }
+                    }
+                }
+
+            }
+
+        }
+        catch(SecurityException e)
+        {
+            e.printStackTrace();
+        }
+
+        return location;
     }
 
 

@@ -50,9 +50,8 @@ import java.util.logging.Handler;
  * Created by Kim on 3/20/2016.
  */
 public class MapsFragment extends Fragment implements OnMapReadyCallback, GeoQueryEventListener,  GoogleMap.OnCameraChangeListener, View.OnClickListener {
-    private static final GeoLocation STARTUP_CENTER = new GeoLocation(51.03, 114.04);
+    private static final GeoLocation STARTUP_CENTER = new GeoLocation(51.04861497826971, -114.07084610313177);
     private static final int STARTUP_ZOOM_LEVEL = 14;
-    private static final String FIREBASE_URL_PREFIX = "https://boomerango.firebaseio.com/";
 
     private SliderLayout sliderShow;
     private View view;
@@ -61,7 +60,6 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, GeoQue
     private SupportMapFragment fragment;
     private Circle searchArea;
     private GoogleMap mMap;
-    private GeoFire geofbdb;
     private GeoQuery query;
 
     private Map<String, Marker> markers;
@@ -195,14 +193,15 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, GeoQue
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(startupCenter, STARTUP_ZOOM_LEVEL));
         mMap.setOnCameraChangeListener(this);
 
-        Firebase.setAndroidContext(getContext());
-
-        geofbdb = new GeoFire(new Firebase(FIREBASE_URL_PREFIX + "imagesV2"));
-        query = geofbdb.queryAtLocation(STARTUP_CENTER, 1);
+        query = MainActivity.geofbdb.queryAtLocation(STARTUP_CENTER, 1);
 
         markers = new HashMap<String, Marker>();
 
         query.addGeoQueryEventListener(this);
+
+        // test statement
+        Marker testMarker = mMap.addMarker(new MarkerOptions().position(new LatLng(STARTUP_CENTER.latitude, STARTUP_CENTER.longitude)));
+        markers.put("laks;jdf;ljawf", testMarker);
     }
 
     public void onMapClick(LatLng latLng) {
@@ -217,7 +216,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, GeoQue
     @Override
     public void onKeyEntered(String key, GeoLocation location) {
         Marker marker = mMap.addMarker(new MarkerOptions().position(new LatLng(location.latitude, location.longitude)));
-        markers.put(key, marker);
+        this.markers.put(key, marker);
     }
 
     /**
@@ -245,7 +244,6 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, GeoQue
         if (marker !=  null) {
             marker.setPosition(new LatLng(location.latitude, location.longitude));
         }
-
     }
 
     @Override
