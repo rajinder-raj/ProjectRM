@@ -20,8 +20,11 @@ import android.widget.Toast;
 
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
+import com.firebase.client.ChildEventListener;
+import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
+import com.firebase.client.Query;
 import com.firebase.geofire.GeoFire;
 import com.firebase.geofire.GeoLocation;
 import com.firebase.geofire.GeoQuery;
@@ -29,6 +32,7 @@ import com.firebase.geofire.GeoQueryEventListener;
 import com.google.android.gms.common.SupportErrorDialogFragment;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -102,7 +106,9 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, GeoQue
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
-        mMap.setMyLocationEnabled(true);
+
+            mMap.setMyLocationEnabled(true);
+
         mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
 
         setUpMap();
@@ -154,13 +160,34 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, GeoQue
         }
     }
 
+    public Image getImageByKey(String key) {
+        Query result = MainActivity.fbdb.equalTo(key);
+
+        return null;
+    }
+
+
     /**
      * When the map starts up create listener for geofire
      */
     @Override
     public void onStart() {
         super.onStart();
+
         //query.addGeoQueryEventListener(this);
+    }
+
+    public void onPause()
+    {
+        super.onPause();
+        mMap.clear();
+    }
+
+    public void onResume()
+    {
+        super.onResume();
+        fragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.location_map);
+        fragment.getMapAsync(this);
     }
 
     /**
@@ -186,8 +213,8 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, GeoQue
 
         // search circle that markers will appear in
         searchArea = mMap.addCircle(new CircleOptions().center(startupCenter).radius(1000));
-        searchArea.setFillColor(Color.argb(66, 255, 219, 164));
-        searchArea.setStrokeColor(Color.argb(66, 255, 162, 47));
+        //searchArea.setFillColor(Color.argb(66, 255, 219, 164));
+        //searchArea.setStrokeColor(Color.argb(66, 255, 162, 47));
 
         // set the camera for the map
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(startupCenter, STARTUP_ZOOM_LEVEL));
@@ -207,6 +234,14 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, GeoQue
     public void onMapClick(LatLng latLng) {
 
     }
+
+    public void setUpMarkers()
+    {
+        for(Marker marker: markers.values()) {
+            mMap.addMarker(new MarkerOptions().position(new LatLng(marker.getPosition().latitude, marker.getPosition().longitude)));
+        }
+    }
+
 
     /**
      * Add markers for new values in the search area
