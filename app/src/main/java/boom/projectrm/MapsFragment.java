@@ -3,11 +3,16 @@ package boom.projectrm;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,8 +23,11 @@ import android.widget.Toast;
 
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
+import com.firebase.client.DataSnapshot;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.Query;
+import com.firebase.client.ValueEventListener;
+import com.firebase.geofire.GeoFire;
 import com.firebase.geofire.GeoLocation;
 import com.firebase.geofire.GeoQuery;
 import com.firebase.geofire.GeoQueryEventListener;
@@ -37,6 +45,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -61,6 +70,8 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, GeoQue
     private GeoQuery query;
 
     private Map<String, Marker> markers;
+    Image currImage;
+    String tempKey;
 
 
     @Override
@@ -127,10 +138,18 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, GeoQue
         textSliderView
                 .description("Real Views")
                         //.image("http://www.exclusivegrouptravel.com/Careers/Beachchairs.jpg");
-                .image("https://d2q79iu7y748jz.cloudfront.net/s/_logo/94511cfc58af497597d0b27153dfc32d.png");
+                .image(getImageUri(getActivity(), currImage.convertBitmap()).getPath());
         sliderShow.removeAllSliders(); //clear slider
         sliderShow.addSlider(textSliderView);
     }
+
+    public Uri getImageUri(Context inContext, Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
+        return Uri.parse(path);
+    }
+
 
     public void onClick(View v) {
         EditText address = (EditText) getActivity().findViewById(R.id.locationAddress);
@@ -169,10 +188,22 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, GeoQue
         }
     }
 
-    public Image getImageByKey(String key) {
-        Query result = MainActivity.fbdb.equalTo(key);
+    public void getImageByKey(String key) {
+        // todo: get image from database
+        tempKey = key;
+        Query result = MainActivity.fbdb.child(key);
 
-        return null;
+        result.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                currImage = dataSnapshot.child(tempKey).getValue(Image.class);
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
     }
 
 
@@ -317,7 +348,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, GeoQue
         searchArea.setCenter(center);
         searchArea.setRadius(radius);
         query.setCenter(new GeoLocation(center.latitude, center.longitude));
-        query.setRadius(radius/1000);
+        query.setRadius(radius / 1000);
     }
 
     /**
