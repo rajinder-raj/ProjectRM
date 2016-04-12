@@ -3,13 +3,11 @@ package boom.projectrm;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,16 +18,11 @@ import android.widget.Toast;
 
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
-import com.firebase.client.ChildEventListener;
-import com.firebase.client.DataSnapshot;
-import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.Query;
-import com.firebase.geofire.GeoFire;
 import com.firebase.geofire.GeoLocation;
 import com.firebase.geofire.GeoQuery;
 import com.firebase.geofire.GeoQueryEventListener;
-import com.google.android.gms.common.SupportErrorDialogFragment;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -118,9 +111,24 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, GeoQue
     public void sliderIntro() {
         TextSliderView textSliderView = new TextSliderView(getActivity());
         textSliderView
-                .description("Travel")
-                .image("http://www.exclusivegrouptravel.com/Careers/Beachchairs.jpg");
+                .description("Real Views")
+                //.image("http://www.exclusivegrouptravel.com/Careers/Beachchairs.jpg");
+                .image("https://76714110-a-e4b983e5-s-sites.googlegroups.com/a/mtroyal.ca/rajinder_eportfolio/home/Logo%20%281%29.png?attachauth=ANoY7cp3W9NYSpiUKAOp-74mJHQsRQxMLfxlnrH95M3i_H3dPp8Xb2Q82A2G-hVtoZjxxoIIFkb6lXj4p-nYo0rG1o5o4eFaElhl565OqUryGWm92j5gS45e8vRbqSFzLQhhte6Qx0wT1qkJP-2M9RslxzCXYfiPEUsdvzro7lTftEm98_VrB1m_2wREkUn2Ni_yIQzaI1VZLLLmT35mR-o-9eGcmS094p_YnUnkYrp1F-8vLDOgw8k%3D&attredirects=0");
 
+        sliderShow.addSlider(textSliderView);
+    }
+
+    /**
+     * Raj - load sliders when the marker on the map is clicked
+     * @date April 12, 2016
+     */
+    public void loadPictureToSlide() {
+        TextSliderView textSliderView = new TextSliderView(getActivity());
+        textSliderView
+                .description("Real Views")
+                        //.image("http://www.exclusivegrouptravel.com/Careers/Beachchairs.jpg");
+                .image("https://d2q79iu7y748jz.cloudfront.net/s/_logo/94511cfc58af497597d0b27153dfc32d.png");
+        sliderShow.removeAllSliders(); //clear slider
         sliderShow.addSlider(textSliderView);
     }
 
@@ -327,6 +335,8 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, GeoQue
         //TODO: Implement the get photo to slideshow here
         Toast.makeText(getActivity().getBaseContext(), "Marker Location: " + marker.getPosition().latitude +
                 marker.getPosition().longitude, Toast.LENGTH_LONG).show();
+
+        loadPictureToSlide();
         return false;
     }
     //@Override
