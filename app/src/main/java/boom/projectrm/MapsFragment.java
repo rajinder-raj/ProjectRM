@@ -53,7 +53,8 @@ import java.util.logging.Handler;
 /**
  * Created by Kim on 3/20/2016.
  */
-public class MapsFragment extends Fragment implements OnMapReadyCallback, GeoQueryEventListener,  GoogleMap.OnCameraChangeListener, View.OnClickListener {
+public class MapsFragment extends Fragment implements OnMapReadyCallback, GeoQueryEventListener,
+        GoogleMap.OnCameraChangeListener, View.OnClickListener, GoogleMap.OnMarkerClickListener {
     private static final GeoLocation STARTUP_CENTER = new GeoLocation(51.04861497826971, -114.07084610313177);
     private static final int STARTUP_ZOOM_LEVEL = 14;
 
@@ -220,6 +221,9 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, GeoQue
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(startupCenter, STARTUP_ZOOM_LEVEL));
         mMap.setOnCameraChangeListener(this);
 
+        //set the on marker listener
+        mMap.setOnMarkerClickListener(this);
+
         query = MainActivity.geofbdb.queryAtLocation(STARTUP_CENTER, 1);
 
         markers = new HashMap<String, Marker>();
@@ -316,6 +320,14 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, GeoQue
     private double zoomLevelToRadius(double zoomLevel) {
         // Approximation to fit circle into view
         return 16384000/Math.pow(2, zoomLevel);
+    }
+
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+        //TODO: Implement the get photo to slideshow here
+        Toast.makeText(getActivity().getBaseContext(), "Marker Location: " + marker.getPosition().latitude +
+                marker.getPosition().longitude, Toast.LENGTH_LONG).show();
+        return false;
     }
     //@Override
     //  public void onResume() {
