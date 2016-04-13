@@ -189,14 +189,31 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, GeoQue
     }
 
     public void getImageByKey(String key) {
-        // todo: get image from database without waiting on data changing
+        // todo: get image from database
         tempKey = key;
-        Query result = MainActivity.fbdb.child(key);
+        //Firebase rootRef = MainActivity.fbdb.child(key);
+        //rootRef.child(key);
+        Query query = MainActivity.fbdb.child("images").equalTo(key);
 
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                currImage = dataSnapshot.child(tempKey).getValue(Image.class);
+        }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
+
+
+        /*
         result.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                currImage = dataSnapshot.getValue(Image.class);
+                currImage = dataSnapshot.child(tempKey).getValue(Image.class);
             }
 
             @Override
@@ -204,6 +221,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, GeoQue
 
             }
         });
+        */
     }
 
 
@@ -366,8 +384,23 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, GeoQue
         //TODO: Implement the get photo to slideshow here
         Toast.makeText(getActivity().getBaseContext(), "Marker Location: " + marker.getPosition().latitude +
                 marker.getPosition().longitude, Toast.LENGTH_LONG).show();
-        getImageByKey(marker.getId());
-        loadPictureToSlide();
+        String keyMarker = "key not found";
+        for (Map.Entry<String, Marker> e : markers.entrySet()) {
+            if (e.getValue().equals(marker)) {
+                keyMarker = e.getKey();
+                break;
+            }
+        }
+
+        Toast.makeText(getActivity().getBaseContext(), keyMarker, Toast.LENGTH_LONG).show();
+
+        getImageByKey(keyMarker);
+
+        Toast.makeText(getActivity().getBaseContext(), keyMarker, Toast.LENGTH_LONG).show();
+        getImageByKey(keyMarker);
+        Toast.makeText(getActivity().getBaseContext(), currImage.toString(), Toast.LENGTH_LONG).show();
+
+        //loadPictureToSlide();
         return false;
     }
     //@Override
