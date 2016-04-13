@@ -189,14 +189,14 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, GeoQue
     }
 
     public void getImageByKey(String key) {
-        // todo: get image from database
+        // todo: get image from database without waiting on data changing
         tempKey = key;
         Query result = MainActivity.fbdb.child(key);
 
         result.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                currImage = dataSnapshot.child(tempKey).getValue(Image.class);
+                currImage = dataSnapshot.getValue(Image.class);
             }
 
             @Override
@@ -366,7 +366,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, GeoQue
         //TODO: Implement the get photo to slideshow here
         Toast.makeText(getActivity().getBaseContext(), "Marker Location: " + marker.getPosition().latitude +
                 marker.getPosition().longitude, Toast.LENGTH_LONG).show();
-
+        getImageByKey(marker.getId());
         loadPictureToSlide();
         return false;
     }
